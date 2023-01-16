@@ -71,14 +71,14 @@ int main() {
         int pid = clone(childFunc, &chld_stk[sizeof(chld_stk) - 1], SIGCHLD, NULL);
         if (pid == -1) {
             perror("clone");
-            exit(1);
+            return 1;
         }
 
         puts("\twaiting for child process to terminate...");
         int wstatus;
         if (waitpid(pid, &wstatus, 0) == -1) {
             perror("waitpid");
-            exit(1);
+            return 1;
         }
         puts("\tchild process terminated");
         printData();
@@ -96,14 +96,14 @@ int main() {
         int pid = clone(childFunc, &chld_stk[sizeof(chld_stk) - 1], SIGCHLD | CLONE_VM, NULL);
         if (pid == -1) {
             perror("clone");
-            exit(1);
+            return 1;
         }
 
         puts("\twaiting for child process to terminate...");
         int wstatus;
         if (waitpid(pid, &wstatus, 0) == -1) {
             perror("waitpid");
-            exit(1);
+            return 1;
         }
         puts("\tchild process terminated");
         printData();
@@ -121,7 +121,7 @@ int main() {
         int pid = clone(childFunc, &chld_stk[sizeof(chld_stk) - 1], CLONE_VM | CLONE_THREAD | CLONE_SIGHAND, NULL);
         if (pid == -1) {
             perror("clone");
-            exit(1);
+            return 1;
         }
 
         // puts("\tsleeping to allow child thread to terminate...");
@@ -143,14 +143,14 @@ int main() {
         int pid = clone(childFunc, &chld_stk[sizeof(chld_stk) - 1], SIGCHLD | CLONE_NEWUSER, arg);
         if (pid == -1) {
             perror("clone");
-            exit(1);
+            return 1;
         }
 
         puts("\twaiting for child process to terminate...");
         int wstatus;
         if (waitpid(pid, &wstatus, 0) == -1) {
             perror("waitpid");
-            exit(1);
+            return 1;
         }
         puts("\tchild process terminated");
 
@@ -158,5 +158,5 @@ int main() {
         puts("");
     }
 
-    exit(0);
+    return 0;
 }

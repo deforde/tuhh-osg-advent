@@ -54,4 +54,5 @@ int main(void) {
     init_persistence("mmap.persistent");
     printf("cnt = %i\n", mmap_data.cnt++);
     deinit_persistence(&mmap_data);
+    return 0;
 }

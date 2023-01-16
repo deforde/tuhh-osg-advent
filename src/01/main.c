@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
         int f = open(pathname, O_RDONLY);
         if (f == -1) {
             perror("open");
-            exit(1);
+            return 1;
         }
 
         ssize_t rsz;
@@ -26,16 +26,16 @@ int main(int argc, char *argv[]) {
             rsz = read(f, buf, sizeof(buf));
             if (rsz == -1) {
                 perror("read");
-                exit(1);
+                return 1;
             }
             fwrite(buf, rsz, 1, stdout);
         } while (!rsz);
 
         if (close(f) == -1) {
             perror("close");
-            exit(1);
+            return 1;
         }
     }
 
-    exit(0);
+    return 0;
 }
