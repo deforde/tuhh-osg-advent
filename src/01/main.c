@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
         } while (!rsz);
 
         if (close(f) == -1) {
-            perror("read");
+            perror("close");
             exit(1);
         }
     }
