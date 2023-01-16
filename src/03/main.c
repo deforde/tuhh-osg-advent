@@ -52,7 +52,15 @@ static void deinit_persistence(void *addr) {
 
 int main(void) {
     init_persistence("mmap.persistent");
+
     printf("cnt = %i\n", mmap_data.cnt++);
+
+    char cmd[256];
+    snprintf(cmd, 256, "pmap %d", getpid());
+    printf("---- system(\"%s\"):\n", cmd);
+    system(cmd);
+
     deinit_persistence(&mmap_data);
+
     return 0;
 }
